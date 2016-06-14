@@ -2417,10 +2417,12 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 								});
 								angular.forEach(targetDom.find('font'), _unwrapElement);
 
-                                text = targetDom.html();
-                                if(_isOneNote){
-                                    text = targetDom.html() || dom.html();
-                                }
+								text = targetDom.html();
+								// LF characters instead of spaces in some spots and they are replaced by "/n", so we need to just swap them to spaces
+								text = text.replace(/\n/g, ' ');
+								if(_isOneNote){
+									text = targetDom.html() || dom.html();
+								}
 							}else{
 								// remove unnecessary chrome insert
 								text = text.replace(/<(|\/)meta[^>]*?>/ig, '');
